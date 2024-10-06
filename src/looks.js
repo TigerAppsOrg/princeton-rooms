@@ -2,9 +2,15 @@ export function dialog() {
   // brief instructions
   const dialog = document.querySelector("dialog");
   const closeButton = document.querySelector("dialog button");
+  const fileInput = document.getElementById("file-input");
 
-  // "Close" button closes the dialog
+  // "Ok" button closes the dialog
   closeButton.addEventListener("click", () => {
+    dialog.close();
+  });
+
+  // Close the dialog if file upload clicked
+  fileInput.addEventListener("click", (event) => {
     dialog.close();
   });
 

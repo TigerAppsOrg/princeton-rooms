@@ -47,18 +47,28 @@ export function parseFile(event) {
         // 'Sq. Ft.'
         // 'Updated'
         function noRemove(item) {
-          return (
-            !/^\s*$/.test(item.str) &&
-            item.str !== "College" &&
-            item.str !== "Building" &&
-            item.str !== "Room" &&
-            item.str !== "Type" &&
-            item.str !== "Sq. Ft." &&
-            !item.str.includes("Updated") &&
-            item.str !== "Dorm" &&
-            item.str !== "Sq Foot" &&
-            !item.str.includes("you")
-          );
+          const str = item.str.toLowerCase().trim();
+
+          // Remove whitespace or exact match "college"
+          if (!str || str == "college") return false;
+
+          // Remove other blocked words
+          const blockedWords = [
+            "building",
+            "dorm",
+            "room",
+            "type",
+            "square",
+            "sq. ft.",
+            "sq ft",
+            "foot",
+            "feet",
+            "independent",
+            "updated",
+            "you",
+          ];
+
+          return !blockedWords.some((word) => str.includes(word));
         }
 
         // iterate through each page
